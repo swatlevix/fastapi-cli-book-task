@@ -1,7 +1,7 @@
 import requests
 
 class ApiService:
-    BASE_URL = "http://127.0.0.1:8000"
+    BASE_URL = "http://127.0.0.1:8000/"
     
     def get(self, endpoint, params=None):
         response = requests.get(f"{self.BASE_URL}{endpoint}", params=params, timeout=10)

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status, Query
 from typing import List, Optional
-from app.database import BOOKS_DB
+from .database import BOOKS_DB
 from app.schemas import BookCreate, BookResponse
 
 app = FastAPI(title="Book Management System API", version="1.0.0")
