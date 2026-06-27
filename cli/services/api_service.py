@@ -1,8 +1,8 @@
 import requests
 
 class ApiService:
-    BASE_URL = "http://127.0.0.1:8000/"
-    
+    # BASE_URL = "http://127.0.0.1:8000/"
+    BASE_URL = "http://fastapi-cli-book-task-production.up.railway.app "
     def get(self, endpoint, params=None):
         response = requests.get(f"{self.BASE_URL}{endpoint}", params=params, timeout=10)
         response.raise_for_status()
