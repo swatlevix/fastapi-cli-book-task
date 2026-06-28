@@ -32,6 +32,9 @@ class BookService:
         response = requests.post(f"{self.BASE_URL}/books", json={"title": title, "author": author}, timeout=10)
         response.raise_for_status()
         data = response.json()
+        if isinstance(data, list) and len(data) > 0:
+            data = data[0]
+            
         return {
             "title": "Book Created",
             "items": {
