@@ -28,6 +28,9 @@ class BookService:
             }
         }
 
+
+
+
     def create_book(self, title, author):
         response = requests.post(f"{self.BASE_URL}/books", json={"title": title, "author": author}, timeout=10)
         response.raise_for_status()
