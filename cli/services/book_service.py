@@ -2,7 +2,7 @@ import requests
 
 class BookService:
     # BASE_URL = "http://127.0.0.1:8000"
-    BASE_URL = "http://fastapi-cli-book-task-production.up.railway.app"
+    BASE_URL = "https://fastapi-cli-book-task-production.up.railway.app"
     def list_books(self, author=None):
         params = {"author": author} if author else None
         response = requests.get(f"{self.BASE_URL}/books", params=params, timeout=10)
