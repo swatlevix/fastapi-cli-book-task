@@ -32,18 +32,61 @@ class BookService:
         response = requests.post(f"{self.BASE_URL}/books", json={"title": title, "author": author}, timeout=10)
         response.raise_for_status()
         data = response.json()
-        if isinstance(data, list) and len(data) > 0:
-            data = data[0]
-            
+        
+        if isinstance(data, list):
+            if len(data) > 0:
+                data = data[0]
+            else:
+                print("The server returned empty list, make sure u've saved the data in the backend.")
+                data = {}
+                
         return {
             "title": "Book Created",
             "items": {
-                "ID": data["id"],
-                "Title": data["title"],
-                "Author": data["author"],
-                "Status": "Active"
+                "ID": data.get("id", "N/A"),         
+                "Title": data.get("title", "N/A"),
+                "Author": data.get("author", "N/A"),
+                "Status": "Active" if data.get("is_active", True) else "Inactive"
             }
         }
+    ###
+    # def create_book(self, title, author):
+    #     response = requests.post(f"{self.BASE_URL}/books", json={"title": title, "author": author}, timeout=10)
+    #     response.raise_for_status()
+    #     data = response.json()
+        
+    #     if isinstance(data, list):
+    #         if len(data) > 0:
+    #             data = data[0]
+    #         else:
+    #             raise Exception("Server returned an empty list")
+                
+    #     return {
+    #         "title": "Book Created",
+    #         "items": {
+    #             "ID": data.get("id"),         
+    #             "Title": data.get("title"),
+    #             "Author": data.get("author"),
+    #             "Status": "Active" if data.get("is_active", True) else "Inactive"
+    #         }
+    #     }
+    ### 
+    # def create_book(self, title, author):
+    #     response = requests.post(f"{self.BASE_URL}/books", json={"title": title, "author": author}, timeout=10)
+    #     response.raise_for_status()
+    #     data = response.json()
+    #     if isinstance(data, list) and len(data) > 0:
+    #         data = data[0]
+            
+    #     return {
+    #         "title": "Book Created",
+    #         "items": {
+    #             "ID": data["id"],
+    #             "Title": data["title"],
+    #             "Author": data["author"],
+    #             "Status": "Active"
+    #         }
+    #     }
 
     def update_book(self, book_id, title, author):
         response = requests.put(f"{self.BASE_URL}/books/{book_id}", json={"title": title, "author": author}, timeout=10)
